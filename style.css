@@ -1,0 +1,510 @@
+/* ═══════════════════════════════════════════
+   VISUALIZER LAYOUT — Reference Design Match
+   ═══════════════════════════════════════════ */
+
+/* Override the v2 viewport to match three-pane layout */
+#v2-viewport {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+  background: var(--bg-page, #f5f5f5);
+}
+
+/* ── WORKBENCH SIDEBAR (matches reference dark nav) ── */
+#v2-workbench-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: #1B2D3F;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.25s ease, min-width 0.25s ease;
+  flex-shrink: 0;
+  border-right: none;
+}
+
+#v2-viewport.tray-closed #v2-workbench-sidebar {
+  width: 0;
+  min-width: 0;
+}
+
+/* Workbench header tabs — match reference style */
+.workbench-header {
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.wb-tab {
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  padding: 12px 5px !important;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.workbench-contents {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* Scrollbar */
+#v2-workbench-sidebar ::-webkit-scrollbar { width: 4px; }
+#v2-workbench-sidebar ::-webkit-scrollbar-track { background: transparent; }
+#v2-workbench-sidebar ::-webkit-scrollbar-thumb { 
+  background: rgba(255,255,255,0.15); 
+  border-radius: 99px; 
+}
+
+/* ── CANVAS WORKSPACE ── */
+#v2-main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+#v2-workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+#v2-canvas-scroll-wrap {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+/* ── TOP TOOLBAR — matches reference topbar ── */
+.v2-ui-overlay {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0 24px !important;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  pointer-events: auto !important;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.v2-master-toolbar {
+  width: 100%;
+}
+
+.v2-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Search input — reference style */
+.canvas-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-subtle, #f5f5f5);
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.v2-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: var(--fg-1, #1B2D3F);
+  width: 160px;
+}
+
+.v2-search-input::placeholder { color: #a3a3a3; }
+
+/* Toolbar buttons — match reference ghost/primary style */
+.v2-toolbar .btn.tiny {
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #e5e5e5;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.v2-toolbar .btn.tiny:hover {
+  background: #f5f5f5;
+  color: #1B2D3F;
+}
+
+.v2-toolbar .btn.primary.tiny {
+  background: #3DD9C5;
+  color: #fff;
+  border-color: #3DD9C5;
+}
+
+.v2-toolbar .btn.primary.tiny:hover {
+  background: #22c4b0;
+}
+
+.v2-toolbar .btn.accent.tiny {
+  background: rgba(61,217,197,0.12);
+  color: #3DD9C5;
+  border-color: rgba(61,217,197,0.3);
+}
+
+/* Divider in toolbar */
+.divider-v {
+  width: 1px;
+  height: 20px;
+  background: #e5e5e5;
+  flex-shrink: 0;
+}
+
+/* ── NODE CARDS — reference step card style ── */
+.v2-node-card {
+  width: 200px;
+  border-radius: 12px !important;
+  border: 1.5px solid #e5e5e5 !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+  position: absolute;
+  overflow: hidden;
+}
+
+.v2-node-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
+  transform: translateY(-1px);
+}
+
+.v2-node-card.selected,
+.v2-node-card.search-focus {
+  border-color: #3DD9C5 !important;
+  box-shadow: 0 4px 20px rgba(61,217,197,0.3) !important;
+}
+
+.v2-node-card.node-dimmed {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.v2-node-card.focused-node {
+  border-color: #3DD9C5 !important;
+  box-shadow: 0 4px 20px rgba(61,217,197,0.3) !important;
+}
+
+/* Accent strip at top of each card (like reference) */
+.v2-node-header {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid #f5f5f5;
+  position: relative;
+}
+
+/* Card type color strip — injected via JS */
+.v2-node-card::before {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #3DD9C5; /* overridden per-card in JS */
+}
+
+.v2-node-card .header-row-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.res-name-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1B2D3F;
+  line-height: 1.35;
+}
+
+.header-badges-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 99px;
+}
+
+/* Card footer */
+.v2-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-top: 1px solid #f5f5f5;
+}
+
+.v2-add-step-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: #3DD9C5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.v2-step-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #6b7280;
+  background: #f5f5f5;
+  padding: 3px 8px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+/* Step rows inside expanded cards */
+.v2-step-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 12px;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.1s;
+  position: relative;
+}
+
+.v2-step-item:hover { background: #fafafa; }
+
+.v2-steps-preview {
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── STAGE DIVIDERS — reference phase label style ── */
+.v2-stage-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.stage-label-bar-v2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 12px;
+}
+
+.stage-name-input-v2 {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  outline: none;
+  padding: 2px 4px;
+  pointer-events: auto;
+}
+
+.stage-name-input-v2:focus {
+  border-bottom-color: #3DD9C5;
+  color: #1B2D3F;
+}
+
+.stage-delete-btn-v2 {
+  background: none;
+  border: none;
+  color: #a3a3a3;
+  cursor: pointer;
+  font-size: 14px;
+  pointer-events: auto;
+  transition: color 0.15s;
+}
+.stage-delete-btn-v2:hover { color: #ef4444; }
+
+/* ── INSPECTOR PANEL — reference detail pane ── */
+#v2-inspector-panel {
+  width: 0;
+  min-width: 0;
+  background: #ffffff;
+  border-left: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.25s ease, min-width 0.25s ease;
+  flex-shrink: 0;
+}
+
+#v2-inspector-panel.open {
+  width: 320px;
+  min-width: 320px;
+}
+
+#inspector-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.inspector-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.inspector-name-input {
+  width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1B2D3F;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.inspector-name-input:focus {
+  border-bottom-color: #3DD9C5;
+}
+
+.inspector-section {
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.inspector-section.no-border { border-bottom: none; }
+
+.inspector-body {
+  padding: 0 20px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  margin-bottom: 8px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: #3DD9C5;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #f5f5f5;
+}
+.breadcrumb:hover { text-decoration: underline; }
+
+/* ── SCOPE / LOGIC BADGES on cards ── */
+.v2-scope-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 99px;
+  border: 1px solid #e5e5e5;
+  color: #a3a3a3;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.v2-scope-badge.is-on {
+  background: rgba(34,197,94,0.12);
+  border-color: #22c55e;
+  color: #16a34a;
+}
+
+.v2-logic-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 99px;
+  border: 1px solid #e5e5e5;
+  color: #a3a3a3;
+  background: none;
+  cursor: pointer;
+}
+.v2-logic-badge.has-logic {
+  border-color: rgba(61,217,197,0.4);
+  color: #3DD9C5;
+  background: rgba(61,217,197,0.08);
+}
+
+/* ── WORKBENCH ITEM CARDS (shelf items) ── */
+.v2-node-card.on-shelf {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  width: 100% !important;
+  margin-bottom: 8px;
+  border-radius: 8px !important;
+}
+
+/* ── FILTER SUBMENU ── */
+#v2-filter-submenu {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 12px 24px;
+  z-index: 99;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.tiny-select {
+  padding: 5px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 12px;
+  background: #fafafa;
+  color: #374151;
+}
+
+/* ── GLOBAL SHELF ── */
+#global-shelf {
+  width: 180px;
+  min-width: 180px;
+  background: #fafafa;
+  border-right: 1px solid #e5e5e5;
+  overflow-y: auto;
+  padding: 12px 8px;
+  flex-shrink: 0;
+}
+
+.global-shelf-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  padding: 0 4px 8px;
+}
